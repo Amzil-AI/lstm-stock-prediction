@@ -4,9 +4,12 @@ Pedagogical solution for **Master 2 Finance, Data et IA** — Deep Learning cour
 
 **Repo:** https://github.com/Amzil-AI/lstm-stock-prediction
 
-Predict Apple's next-day adjusted close with a small LSTM, using a chronological split and a train-only scaler. Compare against a naive baseline (yesterday's close).
+Two tasks on Apple daily data:
 
-> This is a teaching lab, not a trading system. A clean protocol matters more than beating the market.
+- **Part A** — next-day **Close** (OHLCV windows) vs naive yesterday close  
+- **Part B** — next-day **return** with engineered features + **3-fold walk-forward** vs zero-return baseline  
+
+> Teaching lab, not a trading system. Clean protocol matters more than beating the market.
 
 ## Quick start
 
@@ -19,24 +22,20 @@ python train_lstm.py
 
 ## What the script does
 
-1. Downloads (or reloads) daily AAPL OHLCV via `yfinance` (2018–2025)
-2. Builds sliding windows of 60 days → target = next-day Close
-3. Splits **chronologically** 70% / 15% / 15% (never shuffle)
-4. Fits `MinMaxScaler` on the **train period only**
-5. Trains a 2-layer LSTM (PyTorch) with early stopping on validation MSE
-6. Reports RMSE, MAE, MAPE, directional accuracy vs naive baseline
-7. Writes `figures/` and `outputs/metrics.json`
+1. Downloads / reloads AAPL OHLCV (`yfinance`, 2018–2025)
+2. **Part A:** 60-day windows → next Close; chronological 70/15/15; MinMax on train only; LSTM vs naive
+3. **Part B:** features `ret_1`, `ret_5`, `vol_20`, `hl_range`, `vol_chg` → next return; 3 expanding walk-forward folds
+4. Writes figures + `outputs/metrics.json`
 
 ## Outputs
 
 | Path | Content |
 |---|---|
-| `data/AAPL.csv` | Cached prices |
-| `figures/training_curves.png` | Train / val loss |
-| `figures/test_predictions.png` | True vs LSTM vs naive |
-| `outputs/metrics.json` | Test metrics |
-| `outputs/lstm_aapl.pt` | Weights + scaler bounds |
+| `figures/test_predictions.png` | Part A: true vs LSTM vs naive |
+| `figures/test_returns.png` | Part B: last fold returns |
+| `figures/training_curves*.png` | Loss curves |
+| `outputs/metrics.json` | All metrics |
 
 ## Course context
 
-Warm-up before the **Signal Desk** case. Same discipline (no leakage, chronological evaluation), simpler question (price level, one ticker, one architecture).
+Warm-up before **Signal Desk** (direction + costs). On Close level, naive often wins; on returns, directional accuracy stays near chance — that is an acceptable, well-documented result.

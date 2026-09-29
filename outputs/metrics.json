@@ -1,20 +1,81 @@
 {
   "ticker": "AAPL",
   "window": 60,
-  "train_samples": 1365,
-  "val_samples": 292,
-  "test_samples": 293,
-  "lstm": {
-    "rmse": 12.871464521609324,
-    "mae": 10.122197721237013,
-    "mape_pct": 4.294673708872659,
-    "directional_acc_pct": 51.71232876712328
+  "part_a_close": {
+    "task": "next_day_close",
+    "train_samples": 1350,
+    "val_samples": 289,
+    "test_samples": 290,
+    "lstm": {
+      "rmse": 15.134757243237468,
+      "mae": 12.077610597739836,
+      "mape_pct": 4.9516421782548665,
+      "directional_acc_pct": 46.71280276816609
+    },
+    "naive_yesterday": {
+      "rmse": 4.09577527692843,
+      "mae": 2.724651661695871,
+      "mape_pct": 1.2180610418641282,
+      "directional_acc_pct": 48.44290657439446
+    }
   },
-  "naive_yesterday": {
-    "rmse": 4.080221485533887,
-    "mae": 2.7120659277582058,
-    "mape_pct": 1.212128922825507,
-    "directional_acc_pct": 48.97260273972603
+  "part_b_return_walk_forward": {
+    "task": "next_day_return_walk_forward",
+    "features": [
+      "ret_1",
+      "ret_5",
+      "vol_20",
+      "hl_range",
+      "vol_chg"
+    ],
+    "n_folds": 3,
+    "mean_directional_acc_pct": 53.03030303030303,
+    "mean_rmse": 0.017036807818300286,
+    "mean_naive_zero_rmse": 0.017071585690399595,
+    "folds": [
+      {
+        "fold": 1,
+        "train_end": "2021-10-05",
+        "test_start": "2022-06-17",
+        "test_end": "2023-03-01",
+        "n_test": 176,
+        "metrics": {
+          "rmse": 0.02100844768315433,
+          "mae": 0.016040263697504997,
+          "directional_acc_pct": 51.13636363636363,
+          "naive_zero_rmse": 0.021035348989618455
+        },
+        "epochs": 10
+      },
+      {
+        "fold": 2,
+        "train_end": "2023-03-01",
+        "test_start": "2023-11-10",
+        "test_end": "2024-07-25",
+        "n_test": 176,
+        "metrics": {
+          "rmse": 0.014474372010774174,
+          "mae": 0.010473051108419895,
+          "directional_acc_pct": 52.84090909090909,
+          "naive_zero_rmse": 0.014491041791585424
+        },
+        "epochs": 8
+      },
+      {
+        "fold": 3,
+        "train_end": "2024-07-25",
+        "test_start": "2025-04-09",
+        "test_end": "2025-12-18",
+        "n_test": 176,
+        "metrics": {
+          "rmse": 0.015627603760972348,
+          "mae": 0.010875447653234005,
+          "directional_acc_pct": 55.11363636363637,
+          "naive_zero_rmse": 0.015688366289994912
+        },
+        "epochs": 8
+      }
+    ]
   },
-  "note": "Pedagogical exercise. Beating or losing to the naive baseline on price level is both acceptable if the protocol is clean. Do not treat this as a trading edge."
+  "teaching_note": "On Close level, naive yesterday often wins. On returns, compare to zero-return baseline and directional accuracy near 50%. Clean protocol > claimed edge."
 }
