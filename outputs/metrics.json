@@ -1,0 +1,20 @@
+{
+  "ticker": "AAPL",
+  "window": 60,
+  "train_samples": 1365,
+  "val_samples": 292,
+  "test_samples": 293,
+  "lstm": {
+    "rmse": 12.871464521609324,
+    "mae": 10.122197721237013,
+    "mape_pct": 4.294673708872659,
+    "directional_acc_pct": 51.71232876712328
+  },
+  "naive_yesterday": {
+    "rmse": 4.080221485533887,
+    "mae": 2.7120659277582058,
+    "mape_pct": 1.212128922825507,
+    "directional_acc_pct": 48.97260273972603
+  },
+  "note": "Pedagogical exercise. Beating or losing to the naive baseline on price level is both acceptable if the protocol is clean. Do not treat this as a trading edge."
+}

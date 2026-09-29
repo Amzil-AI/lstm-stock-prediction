@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+outputs/*.pt
+# keep metrics and figures in repo for the corrigé
