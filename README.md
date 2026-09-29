@@ -2,6 +2,9 @@
 
 Pedagogical solution for **Master 2 Finance, Data et IA** — Deep Learning course.
 
+**Repo:** https://github.com/LikhitaYerra/lstm-stock-prediction  
+*(intended home under `Amzil-AI/lstm-stock-prediction` after org transfer)*
+
 Predict Apple's next-day adjusted close with a small LSTM, using a chronological split and a train-only scaler. Compare against a naive baseline (yesterday's close).
 
 > This is a teaching lab, not a trading system. A clean protocol matters more than beating the market.
